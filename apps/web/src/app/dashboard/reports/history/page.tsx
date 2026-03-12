@@ -107,7 +107,7 @@ export default function HistoryReportPage() {
           <div>
             <label className="block text-xs text-gray-500 mb-1">{t('filterType')}</label>
             <Select value={filterType} onValueChange={(v) => setFilterType(v === 'ALL' ? '' : (v ?? ''))}>
-              <SelectTrigger className="w-36 h-8 text-sm">
+              <SelectTrigger className="w-full sm:w-36 h-8 text-sm">
                 <SelectValue placeholder={t('filterAllTypes')} />
               </SelectTrigger>
               <SelectContent>
@@ -121,7 +121,7 @@ export default function HistoryReportPage() {
           <div>
             <label className="block text-xs text-gray-500 mb-1">{t('filterProduct')}</label>
             <Select value={filterProductId} onValueChange={(v) => setFilterProductId(v === 'ALL' ? '' : (v ?? ''))}>
-              <SelectTrigger className="w-48 h-8 text-sm">
+              <SelectTrigger className="w-full sm:w-48 h-8 text-sm">
                 <SelectValue placeholder={t('filterAllProducts')} />
               </SelectTrigger>
               <SelectContent>
@@ -138,7 +138,7 @@ export default function HistoryReportPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">

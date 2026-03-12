@@ -23,7 +23,7 @@ authRouter.post('/login', async (req, res) => {
   }
   const token = jwt.sign({ userId: 1 }, process.env.JWT_SECRET!, { expiresIn: '7d' });
   res.cookie('token', token, { httpOnly: true, sameSite: 'lax', maxAge: 7 * 24 * 60 * 60 * 1000 });
-  res.json({ ok: true });
+  res.json({ ok: true, token });
 });
 
 authRouter.post('/logout', (_req, res) => {

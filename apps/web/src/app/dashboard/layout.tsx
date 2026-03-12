@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
@@ -16,6 +17,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const pathname = usePathname();
   const router = useRouter();
   const { t, lang, setLang } = useLanguage();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navLinks = [
     {
@@ -91,7 +93,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top header bar */}
-      <header className="h-12 bg-[#1677ff] flex items-center px-4 gap-4 shrink-0 z-10">
+      <header className="h-12 bg-[#1677ff] flex items-center px-2 sm:px-4 gap-2 sm:gap-4 shrink-0 z-10">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="md:hidden text-white p-1.5 rounded hover:bg-white/10 transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
+          </svg>
+        </button>
         <div className="flex items-center gap-2 text-white font-bold text-base tracking-wide">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -132,9 +143,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </header>
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 relative">
+        {/* Mobile sidebar overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 top-12 bg-black/30 z-20 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
         {/* Left sidebar */}
-        <aside className="w-52 bg-white border-r border-gray-200 flex flex-col shrink-0">
+        <aside
+          className={cn(
+            'w-52 bg-white border-r border-gray-200 flex flex-col shrink-0 transition-transform duration-200',
+            'fixed top-12 bottom-0 z-30 md:static md:translate-x-0',
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          )}
+        >
           <nav className="flex flex-col p-2 gap-0.5 flex-1">
             {navLinks.map((link) => {
               const isActive =
@@ -144,6 +169,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => setSidebarOpen(false)}
                   className={cn(
                     'flex items-center gap-2.5 px-3 py-2 rounded text-sm transition-colors',
                     isActive
@@ -165,7 +191,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-5 overflow-auto">{children}</main>
+        <main className="flex-1 p-3 sm:p-5 overflow-auto min-w-0">{children}</main>
       </div>
     </div>
   );

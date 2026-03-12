@@ -66,7 +66,7 @@ export default function StockReportPage() {
         <p className="text-sm text-gray-500">{t('stockSubtitle')}</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
           <div className="text-xl font-bold text-gray-900">{items.length}</div>
           <div className="text-xs text-gray-500 mt-0.5">{t('stockTotal')}</div>
@@ -93,7 +93,7 @@ export default function StockReportPage() {
         </label>
 
         <Select value={categoryId} onValueChange={(v) => setCategoryId(v === 'ALL' ? '' : (v ?? ''))}>
-          <SelectTrigger className="w-44 h-8 text-sm">
+          <SelectTrigger className="w-full sm:w-44 h-8 text-sm">
             <SelectValue placeholder={t('filterAllCategories')} />
           </SelectTrigger>
           <SelectContent>
@@ -105,7 +105,7 @@ export default function StockReportPage() {
         </Select>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">

@@ -83,7 +83,7 @@ export default function TransactionsPage() {
 
       <div className="flex gap-2 items-center flex-wrap">
         <Select value={filterType} onValueChange={(v) => setFilterType(v === 'ALL' ? '' : (v ?? ''))}>
-          <SelectTrigger className="w-40 h-8 text-sm">
+          <SelectTrigger className="w-full sm:w-40 h-8 text-sm">
             <SelectValue placeholder={t('filterAllTypes')} />
           </SelectTrigger>
           <SelectContent>
@@ -95,7 +95,7 @@ export default function TransactionsPage() {
         </Select>
 
         <Select value={filterProductId} onValueChange={(v) => setFilterProductId(v === 'ALL' ? '' : (v ?? ''))}>
-          <SelectTrigger className="w-52 h-8 text-sm">
+          <SelectTrigger className="w-full sm:w-52 h-8 text-sm">
             <SelectValue placeholder={t('filterAllProducts')} />
           </SelectTrigger>
           <SelectContent>
@@ -111,7 +111,7 @@ export default function TransactionsPage() {
         </button>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">

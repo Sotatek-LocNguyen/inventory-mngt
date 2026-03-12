@@ -140,7 +140,7 @@ export default function ProductsPage() {
         </button>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
@@ -202,7 +202,7 @@ export default function ProductsPage() {
           <DialogHeader>
             <DialogTitle>{editing ? t('editProduct') : t('addProduct')}</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-3 py-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-1">
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('labelSku')} <span className="text-red-500">*</span></label>
               <input value={form.sku} onChange={field('sku')} className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />

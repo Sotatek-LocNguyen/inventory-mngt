@@ -5,6 +5,9 @@
   "scripts": {
     "dev:api": "bun --cwd apps/api dev",
     "dev:web": "bun --cwd apps/web dev",
+    "dev:mobile": "bun --cwd apps/mobile start",
+    "build:mobile:android": "bun --cwd apps/mobile eas build --platform android",
+    "build:mobile:ios": "bun --cwd apps/mobile eas build --platform ios",
     "typecheck": "bun --cwd apps/api typecheck && bun --cwd apps/web typecheck",
     "lint": "bun --cwd apps/api lint && bun --cwd apps/web lint"
   }
