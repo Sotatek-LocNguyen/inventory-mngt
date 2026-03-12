@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
+}
+
+model Supplier {
+  id           Int           @id @default(autoincrement())
+  name         String
+  phone        String?
+  email        String?
+  transactions Transaction[]
+}
+
+model Product {
+  id           Int           @id @default(autoincrement())
+  sku          String        @unique
+  name         String
+  unit         String
+  costPrice    Decimal
+  salePrice    Decimal
+  stockQty     Int           @default(0)
+  lowStockAt   Int?
+  categoryId   Int
+  category     Category      @relation(fields: [categoryId], references: [id])
+  transactions Transaction[]
+  deletedAt    DateTime?
+  createdAt    DateTime      @default(now())
+}
+
+model Transaction {
+  id         Int             @id @default(autoincrement())
+  type       TransactionType
+  productId  Int
+  product    Product         @relation(fields: [productId], references: [id])
+  quantity   Int
+  note       String?
+  supplierId Int?
+  supplier   Supplier?       @relation(fields: [supplierId], references: [id])
+  createdAt  DateTime        @default(now())
+}
+
+enum TransactionType {
+  STOCK_IN
+  STOCK_OUT
+  ADJUSTMENT
+}
