@@ -108,7 +108,9 @@ export default function HistoryReportPage() {
             <label className="block text-xs text-gray-500 mb-1">{t('filterType')}</label>
             <Select value={filterType} onValueChange={(v) => setFilterType(v === 'ALL' ? '' : (v ?? ''))}>
               <SelectTrigger className="w-full sm:w-36 h-8 text-sm">
-                <SelectValue placeholder={t('filterAllTypes')} />
+                <SelectValue placeholder={t('filterAllTypes')}>
+                  {(v: string) => v === 'STOCK_IN' ? t('txStockIn') : v === 'STOCK_OUT' ? t('txStockOut') : t('txAdjustment')}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">{t('filterAllTypes')}</SelectItem>
@@ -122,7 +124,9 @@ export default function HistoryReportPage() {
             <label className="block text-xs text-gray-500 mb-1">{t('filterProduct')}</label>
             <Select value={filterProductId} onValueChange={(v) => setFilterProductId(v === 'ALL' ? '' : (v ?? ''))}>
               <SelectTrigger className="w-full sm:w-48 h-8 text-sm">
-                <SelectValue placeholder={t('filterAllProducts')} />
+                <SelectValue placeholder={t('filterAllProducts')}>
+                  {(v: string) => { const p = products.find((p) => String(p.id) === v); return p ? `${p.sku} — ${p.name}` : v; }}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">{t('filterAllProducts')}</SelectItem>

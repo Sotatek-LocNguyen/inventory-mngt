@@ -3,9 +3,13 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "bun --watch src/index.ts",
+    "seed": "bun prisma/seed.ts",
     "typecheck": "tsc --noEmit",
     "lint": "biome check src/",
     "test": "vitest run"
+  },
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
   },
   "dependencies": {
     "@inventory/types": "workspace:*",

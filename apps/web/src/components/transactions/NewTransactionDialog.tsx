@@ -107,7 +107,9 @@ export function NewTransactionDialog({ open, onOpenChange, products, suppliers, 
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('labelTxType')} <span className="text-red-500">*</span></label>
             <Select value={type} onValueChange={(v) => setType(v as typeof type)}>
               <SelectTrigger className="h-9 text-sm">
-                <SelectValue />
+                <SelectValue>
+                  {(v: string) => txTypes.find((tx) => tx.value === v)?.label ?? v}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {txTypes.map((tx) => (
@@ -121,7 +123,9 @@ export function NewTransactionDialog({ open, onOpenChange, products, suppliers, 
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('labelProduct')} <span className="text-red-500">*</span></label>
             <Select value={productId} onValueChange={(v) => { setProductId(v ?? ''); setStockError(''); }}>
               <SelectTrigger className="h-9 text-sm">
-                <SelectValue placeholder={t('labelProduct')} />
+                <SelectValue placeholder={t('labelProduct')}>
+                  {(v: string) => { const p = products.find((p) => String(p.id) === v); return p ? `${p.sku} — ${p.name}` : v; }}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {products.map((p) => (
@@ -161,7 +165,9 @@ export function NewTransactionDialog({ open, onOpenChange, products, suppliers, 
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('labelSupplier')}</label>
               <Select value={supplierId} onValueChange={(v) => setSupplierId(v ?? '')}>
                 <SelectTrigger className="h-9 text-sm">
-                  <SelectValue placeholder={t('supplierOptional')} />
+                  <SelectValue placeholder={t('supplierOptional')}>
+                    {(v: string) => suppliers.find((s) => String(s.id) === v)?.name ?? v}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {suppliers.map((s) => (

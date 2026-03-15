@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew reinstall:*)",
+      "Bash(bunx prisma:*)",
+      "Bash(find /Users/locnguyen/Documents/Loc_Projects/inventory-mngt -path \"*/.prisma/client/default*\" 2>/dev/null | head -5)",
+      "Bash(kill 27222 && echo \"killed\" || echo \"failed\")",
+      "Bash(nvm --version)",
+      "Read(//Users/locnguyen/.nvm/versions/node/**)",
+      "Bash(npm config:*)",
+      "Read(//Users/locnguyen/**)",
+      "Read(//Users/locnguyen/.config/npm/**)",
+      "Bash(bash -c 'source ~/.nvm/nvm.sh && nvm use 20 && node --version')"
+    ]
+  }
+}

@@ -94,7 +94,9 @@ export default function StockReportPage() {
 
         <Select value={categoryId} onValueChange={(v) => setCategoryId(v === 'ALL' ? '' : (v ?? ''))}>
           <SelectTrigger className="w-full sm:w-44 h-8 text-sm">
-            <SelectValue placeholder={t('filterAllCategories')} />
+            <SelectValue placeholder={t('filterAllCategories')}>
+              {(v: string) => categories.find((c) => String(c.id) === v)?.name ?? v}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="ALL">{t('filterAllCategories')}</SelectItem>

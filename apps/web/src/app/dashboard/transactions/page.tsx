@@ -84,7 +84,9 @@ export default function TransactionsPage() {
       <div className="flex gap-2 items-center flex-wrap">
         <Select value={filterType} onValueChange={(v) => setFilterType(v === 'ALL' ? '' : (v ?? ''))}>
           <SelectTrigger className="w-full sm:w-40 h-8 text-sm">
-            <SelectValue placeholder={t('filterAllTypes')} />
+            <SelectValue placeholder={t('filterAllTypes')}>
+              {(v: string) => v === 'STOCK_IN' ? t('txStockIn') : v === 'STOCK_OUT' ? t('txStockOut') : t('txAdjustment')}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="ALL">{t('filterAllTypes')}</SelectItem>
@@ -96,7 +98,9 @@ export default function TransactionsPage() {
 
         <Select value={filterProductId} onValueChange={(v) => setFilterProductId(v === 'ALL' ? '' : (v ?? ''))}>
           <SelectTrigger className="w-full sm:w-52 h-8 text-sm">
-            <SelectValue placeholder={t('filterAllProducts')} />
+            <SelectValue placeholder={t('filterAllProducts')}>
+              {(v: string) => { const p = products.find((p) => String(p.id) === v); return p ? `${p.sku} — ${p.name}` : v; }}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="ALL">{t('filterAllProducts')}</SelectItem>

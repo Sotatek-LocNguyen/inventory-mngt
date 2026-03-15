@@ -219,7 +219,9 @@ export default function ProductsPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('colCategory')} <span className="text-red-500">*</span></label>
               <Select value={form.categoryId} onValueChange={(v) => setForm((f) => ({ ...f, categoryId: v ?? '' }))}>
                 <SelectTrigger className="h-9 text-sm">
-                  <SelectValue placeholder={t('colCategory')} />
+                  <SelectValue placeholder={t('colCategory')}>
+                    {(v: string) => categories.find((c) => String(c.id) === v)?.name ?? v}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((c) => (
